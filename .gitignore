@@ -4,3 +4,17 @@ exampleSite/public/
 exampleSite/resources/
 *.lock
 public
+
+# Terraform files
+# Environment variables file
+.env
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+terraform.tfvars.json
+override.tf
+override.tf.json
+crash.log
+crash.log.*
+.terraform.lock.hcl
