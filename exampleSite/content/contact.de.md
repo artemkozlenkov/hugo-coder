@@ -1,5 +1,5 @@
 +++
-title = "Contact"
+title = "Kontakt"
 date = "2025-06-08"
 slug = "contact"
 author = "Artem Kozlenkov"
@@ -141,7 +141,7 @@ input[type=checkbox]:checked + label {
 
 <div class="contact-container">
   <div class="contact-row">
-    <h4 style="text-align:center">We'd love to hear from you!</h4>
+    <h4 style="text-align:center">Wir würden uns freuen, von Ihnen zu hören!</h4>
   </div>
   <form action="https://formspree.io/f/xanjeyzo" method="POST" class="contact-row contact-input-container" novalidate>
     <div class="contact-col-xs-12">
@@ -153,23 +153,23 @@ input[type=checkbox]:checked + label {
     <div class="contact-col-md-6 contact-col-sm-12">
       <div class="contact-styled-input">
         <input class="contact-input" type="email" name="email" required />
-        <label>Email</label> 
+        <label>E-Mail</label> 
       </div>
     </div>
     <div class="contact-col-md-6 contact-col-sm-12">
       <div class="contact-styled-input" style="float:right;">
-        <input class="contact-input" type="tel" name="sender_phone" pattern="^\+?[0-9\s\-]{7,15}$" />
-        <label>Phone Number</label> 
+        <input class="contact-input" type="tel" name="sender_phone" placeholder="+41 77 123 45 67" pattern="^\+?[0-9\s\-]{7,15}$" />
+        <label>Telefonnummer</label> 
       </div>
     </div>
     <div class="contact-col-xs-12">
       <div class="contact-styled-input contact-wide">
         <textarea class="contact-textarea" name="message" required></textarea>
-        <label>Message</label>
+        <label>Nachricht</label>
       </div>
     </div>
     <div class="contact-col-xs-12">
-      <button type="submit" class="contact-btn-lrg contact-submit-btn">Send Message</button>
+      <button type="submit" class="contact-btn-lrg contact-submit-btn">Nachricht senden</button>
     </div>
   </form>
 </div>
@@ -184,7 +184,6 @@ document.querySelectorAll('.contact-input, .contact-textarea').forEach(input => 
     }
   }
   input.addEventListener('input', toggleHasContent);
-  // Initialize on page load
   toggleHasContent();
 });
 </script>
