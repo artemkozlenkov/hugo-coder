@@ -3,6 +3,8 @@
 # Deployment script to upload Hugo static site to Azure Blob Storage
 
 set -e
+echo "Running Gitleaks scan..."
+docker run --rm -v "$(pwd)":/repo -w /repo zricethezav/gitleaks:latest detect
 
 # Load environment variables from .env file if it exists
 if [ -f .env ]; then
