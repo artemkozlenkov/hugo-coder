@@ -1,53 +1,98 @@
 <p align="center">
-  <p align="center">
-    <a href="https://themes.gohugo.io/hugo-coder/">
-      <img src="https://img.shields.io/badge/theme-hugo--coder-2b8cbe" alt="Hugo Theme Badge"">
-    </a>
-    <a href="https://github.com/luizdepra/hugo-coder/blob/master/LICENSE.txt">
-      <img src="https://img.shields.io/github/license/luizdepra/hugo-coder.svg" alt="MIT License Badge">
-    </a>
-  </p>
-
-  <p align="center">
-    <a href="https://github.com/luizdepra/hugo-coder">
-      <img src="images/logos/logotype-a.png" alt="Hugo Coder Logo" width="600px" height="184px">
-    </a>
-  </p>
+  <a href="#">
+    <img src="images/logos/logotype-a.png" alt="Cody Portfolio Logo" width="600px" height="184px">
+  </a>
 </p>
 
-A simple and clean blog theme for [Hugo](https://gohugo.io/).
+# Hugo Coder Portfolio Theme
 
-![](images/screenshot.png)
+A customized Hugo theme tailored for personal portfolios and blogs, leveraging Azure static website hosting and Terraform automation. Showcase your work with a clean, responsive design, while automating deployments and infrastructure provisioning.
 
-## Live Demo
+## Purpose
 
-See [here](https://hugo-coder.netlify.app/).
+This fork adapts the original Hugo Coder theme to support:
+
+- Static site hosting on Azure Blob Storage (`$web` container) with CI/CD.
+- Infrastructure provisioning using Terraform for resource group, storage account, and service principal.
+- Secret scanning via Gitleaks before deployment.
+- Easy customization for portfolio sections and project showcases.
+
+## Main Features
+
+- Responsive, minimal blog & portfolio layout.
+- Built-in Terraform configuration ([`main.tf`](main.tf:1)) for Azure resources.
+- Deployment script ([`deploy_to_blob.sh`](deploy_to_blob.sh:1)) with Gitleaks integration.
+- Makefile shortcuts for local development and build tasks.
+- Multi-language support via Hugo’s i18n.
+- Customizable portfolio sections and contact forms.
+
+## Rationale
+
+Using Azure services and Terraform ensures:
+
+- Reliable, scalable static hosting.
+- Infrastructure-as-code for repeatable environments.
+- Automated secret scanning and secure deployments.
+- Simplified maintenance and version control.
 
 ## Quick Start
 
-1. Add the repository into your Hugo Project repository as a submodule, `git submodule add https://github.com/luizdepra/hugo-coder.git themes/hugo-coder`.
-2. Configure your `hugo.toml`. You can either use [this minimal configuration](https://github.com/luizdepra/hugo-coder/blob/main/docs/configurations.md#complete-example) as a base, or look for a complete explanation about all configurations [here](https://github.com/luizdepra/hugo-coder/blob/main/docs/configurations.md). The [`hugo.toml`](https://github.com/luizdepra/hugo-coder/blob/master/exampleSite/hugo.toml) inside the [`exampleSite`](https://github.com/luizdepra/hugo-coder/tree/master/exampleSite) is also a good reference.
-3. Build your site with `hugo server` and see the result at `http://localhost:1313/`.
+### Local Development
 
-## Documentation
+```bash
+# Start Hugo server (with drafts)
+make demo
 
-See the [`docs`](docs/home.md) folder.
+# Build production site
+make build
+
+# Preview production build
+hugo server -D --source=exampleSite
+```
+
+### Repository Setup
+
+```bash
+git submodule add https://github.com/yourusername/hugo-coder.git themes/hugo-coder
+```
+
+Configure `hugo.toml` in your site root:
+
+```toml
+baseURL = "https://<your-domain>/"
+languageCode = "en-us"
+title = "My Portfolio"
+theme = "hugo-coder"
+```
+
+Customize content under `content/` and layouts as needed.
+
+## CI/CD with Azure & Terraform
+
+1. Install [Terraform](https://www.terraform.io/) and the [Azure CLI](https://docs.microsoft.com/cli/azure/).
+2. Initialize and apply Terraform:
+
+   ```bash
+   terraform init
+   terraform apply -auto-approve
+   ```
+
+3. Export Service Principal credentials:
+
+   ```bash
+   export SP_CLIENT_ID=$(terraform output -raw sp_client_id)
+   export SP_CLIENT_SECRET=$(terraform output -raw sp_client_secret)
+   export TENANT_ID=$(terraform output -raw tenant_id)
+   ```
+
+4. Run deployment:
+
+   ```bash
+   ./deploy_to_blob.sh
+   ```
+
+Integrate these steps in your CI pipeline (e.g., GitHub Actions) for automated deployments.
 
 ## License
 
-Coder is licensed under the [MIT license](https://github.com/luizdepra/hugo-coder/blob/master/LICENSE.md).
-
-## Maintenance
-
-This theme is maintained by its author [Luiz de Prá](https://github.com/luizdepra) with the help from these awesome [contributors](CONTRIBUTORS.md).
-
-## Sponsoring
-
-If you like my project or it was useful for you, consider supporting its development. Just:
-
-<a href="https://www.buymeacoffee.com/luizdepra" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-green.png" alt="Buy Me A Coffee" height="41" width="174"></a>
-
-## Special Thanks
-
--   Gleen McComb, for his great [article](https://glennmccomb.com/articles/how-to-build-custom-hugo-pagination/) about custom pagination.
--   All contributors, for every PR and Issue reported.
+This theme is licensed under the [MIT license](LICENSE.md).
