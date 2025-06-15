@@ -1,0 +1,39 @@
+<div id="cookie-consent" style="display:none; position: fixed; bottom: 0; width: 100%; background: #222; color: #fff; text-align: center; padding: 1em; z-index: 1000;">
+  <p>{{ i18n "cookieConsentText" | default "This site uses cookies to enhance your experience. By continuing, you agree to our use of cookies." }}</p>
+  <button id="cookie-consent-accept">{{ i18n "cookieConsentAccept" | default "Accept" }}</button>
+  <button id="cookie-consent-decline" style="margin-left:1em;">{{ i18n "cookieConsentDecline" | default "Decline" }}</button>
+</div>
+<script>
+(function() {
+  var consent = localStorage.getItem('cookieConsent');
+  var container = document.getElementById('cookie-consent');
+  function loadAnalytics() {
+    document.querySelectorAll('script[type="text/plain"][data-consent="analytics"]').forEach(function(el) {
+      var script = document.createElement('script');
+      if (el.src) script.src = el.getAttribute('src');
+      script.async = el.async;
+      if (el.integrity) script.integrity = el.getAttribute('integrity');
+      if (el.crossOrigin) script.crossOrigin = el.getAttribute('crossorigin');
+      script.text = el.innerHTML;
+      el.parentNode.insertBefore(script, el.nextSibling);
+    });
+  }
+  if (consent === 'accepted') {
+    loadAnalytics();
+    return;
+  }
+  if (consent === 'denied') {
+    return;
+  }
+  container.style.display = 'block';
+  document.getElementById('cookie-consent-accept').onclick = function() {
+    localStorage.setItem('cookieConsent', 'accepted');
+    container.style.display = 'none';
+    loadAnalytics();
+  };
+  document.getElementById('cookie-consent-decline').onclick = function() {
+    localStorage.setItem('cookieConsent', 'denied');
+    container.style.display = 'none';
+  };
+})();
+</script>

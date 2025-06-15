@@ -96,9 +96,11 @@
   {{- partial "analytics/matomo" . -}}
   {{ end }}
 
-  {{ if and .Site.Params.googleTagManager .Site.Params.googleTagManager.id }}
+<script type="text/plain" data-consent="analytics">
+{{- if and .Site.Params.googleTagManager .Site.Params.googleTagManager.id }}
   {{- partial "analytics/googletagmanager" . -}}
-  {{ end }}
+{{- end }}
+</script>
 
   {{ if and .Site.Params.applicationInsights .Site.Params.applicationInsights.connectionString }}
   {{- partial "analytics/applicationinsights" . -}}
@@ -133,5 +135,6 @@
   {{ end }}
 
   {{- partial "body/extensions" . -}}
+{{ partial "cookie-consent.html" . }}
 </body>
 </html>
