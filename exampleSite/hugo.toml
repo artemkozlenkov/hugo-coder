@@ -1,4 +1,4 @@
-baseURL = "http://personal.softawebit.com"
+baseURL = "https://personal.softawebit.com"
 title = "artem kozlenkov"
 theme = "hugo-coder"
 languageCode = "en"
