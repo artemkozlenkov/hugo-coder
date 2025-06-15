@@ -5,6 +5,7 @@
 {{ else }}
 <link rel="canonical" href="{{ .Permalink }}">
 {{ end }}
+<link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
 
 {{ partialCached "head/theme-styles.html" . }}
 
